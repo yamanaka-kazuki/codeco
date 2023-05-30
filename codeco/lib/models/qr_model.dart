@@ -12,7 +12,7 @@ class QrModel {
   Image? image;
   @Property(type: PropertyType.date)
   DateTime? deadline;
-  Bool? isUsed;
+  bool? isUsed;
 
-  
+  QrModel({this.title, this.image, this.deadline, this.isUsed});
 }

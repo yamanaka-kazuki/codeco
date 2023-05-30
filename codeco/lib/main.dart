@@ -3,8 +3,20 @@ import 'package:codeco/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'models/qr_model.dart';
+import 'object_box.dart';
+
+/// Provides access to the ObjectBox Store throughout the app.
+late ObjectBox objectbox;
+
+Future<void> main() async {
+  // This is required so ObjectBox can get the application directory
+  // to store the database in.
+  WidgetsFlutterBinding.ensureInitialized();
+
+  objectbox = await ObjectBox.create();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,6 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
     SettingsPage(),
     AddQrCodePage(),
   ];
+
+  final qrBox = objectbox.store.box<QrModel>();
 
   @override
   Widget build(BuildContext context) {
